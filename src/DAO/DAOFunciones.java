@@ -26,7 +26,24 @@ public class DAOFunciones {
             e.printStackTrace();
         }
     }
+    
+    public void addFuncion(Funcion funcion){
+        
+    }
 
+    
+    public void buscarFuncion(String nombreFuncion){
+        
+    }
+    
+    public void eliminarFuncion(Funcion funcion){
+        
+    }
+    
+    public void modificarFuncion(Funcion funcion){
+        
+    }
+    
     public void readFile() throws FileNotFoundException, IOException {
         String line;
         BufferedReader reader = new BufferedReader(new FileReader(PERFORMANCES_TEXT_FILE));
@@ -38,7 +55,6 @@ public class DAOFunciones {
             this.funciones.add(funcion);
         }
     }
-
 
     public void writeFile(String funcionAGuardar) {
         try {

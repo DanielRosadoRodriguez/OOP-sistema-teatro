@@ -16,8 +16,16 @@ public class Seat {
 
     public Seat(String id) {
         this.status = "available";
-        setStatusColor();
         this.id = id;
+        setStatusColor();
+        generateSection();
+        generatePrice();
+    }
+
+    public Seat(String id, String status) {
+        this.status = status;
+        this.id = id;
+        setStatusColor();
         generateSection();
         generatePrice();
     }
@@ -36,22 +44,22 @@ public class Seat {
             setStatusColor(Color.gray);
         }
     }
-    
-    public void generateSection(){
+
+    public void generateSection() {
         this.section = this.id.charAt(0);
     }
-    
-    //TODO
-    public void generatePrice(){
-        if(this.section == 'a'){
+
+    public void generatePrice() {
+        //TODO
+        if (this.section == 'a') {
             System.out.println("this is section a");
         }
     }
-    
+
     public void setStatusColor(Color statusColor) {
         this.statusColor = statusColor;
     }
-    
+
     public String getStatus() {
         return status;
     }

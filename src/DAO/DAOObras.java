@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package DAO;
 
 import java.io.BufferedReader;
@@ -19,17 +15,13 @@ public class DAOObras {
         String SEPARADOR=",";
         BufferedReader bufferLectura=null;
         try{
-          // Abrir el .txt en buffer de lectura
             bufferLectura = new BufferedReader(new FileReader("./src/DAO/Obras.txt"));
-            // Leer una linea del archivo
             String linea = bufferLectura.readLine();
             Obra obras;
             while (linea != null) {
-                // Sepapar la linea leída con el separador definido previamente
                 String[] datos = linea.split(SEPARADOR);
                 obras = new Obra(datos[0],datos[1],datos[2],datos[3],datos[4], Double.parseDouble(datos[5]),Integer.parseInt(datos[6]));
                 lista.add(obras);
-                // Volver a leer otra línea del fichero
                 linea = bufferLectura.readLine();
             }   
         } catch (IOException e) {

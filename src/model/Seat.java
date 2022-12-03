@@ -12,7 +12,7 @@ public class Seat {
     private Color statusColor;
     private String id;
     private char section;
-    private int price;
+    private double price;
 
     public Seat(String id) {
         this.status = "available";

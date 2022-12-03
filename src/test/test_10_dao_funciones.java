@@ -13,8 +13,10 @@ public class test_10_dao_funciones {
 
         DAOFunciones dao = new DAOFunciones();
         DAOObras dao_obras = new DAOObras();
-        Obra obra = dao_obras.consultar("heathers");
-        Funcion funcion = new Funcion(obra, "fecha_nueva", "hora_nueva");
+        Obra obra = new Obra("Blancanieves","Florence Pugh","MrBeast","helicoptero apache","Zapatillas de vidrio",6.0,5);
+        dao_obras.insertar(obra);
+        Funcion funcion = new Funcion(obra, "fecha chisyosa", "hora chisyosa");
+        dao.addFuncion(funcion);
         dao.modificarFuncion(funcion);
     }
 }

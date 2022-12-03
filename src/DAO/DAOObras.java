@@ -103,7 +103,7 @@ public class DAOObras {
         System.out.println("Registro inxistente");
         return 1; //Registro no encontrado
     }   
-    public Obra consultar(String nombreObra){
+    public Obra getObra(String nombreObra){
         for(Obra obra: lista){
             if(obra.getNombre().equals(nombreObra)){
                 return obra;  // Retorna Registro Encontrado

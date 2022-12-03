@@ -28,6 +28,20 @@ public class DAOFunciones {
         }
     }
 
+    public void readFile() throws FileNotFoundException, IOException {
+        String line;
+        BufferedReader reader = new BufferedReader(new FileReader(PERFORMANCES_TEXT_FILE));
+        while ((line = reader.readLine()) != null) {
+            String[] performanceData = line.split(",");
+            DAOObras daoObras = new DAOObras();
+            Obra obra = daoObras.getObra(performanceData[0]);
+            String fecha = performanceData[1];
+            String hora = performanceData[2];
+            Funcion funcion = new Funcion(obra, fecha, hora);
+            this.funciones.add(funcion);
+        }
+    }
+
     public void addFuncion(Funcion funcion) {
         this.funciones.add(funcion);
         updateDBFile();
@@ -71,20 +85,6 @@ public class DAOFunciones {
         return this.funciones.indexOf(funciion);
     }
 
-    public void readFile() throws FileNotFoundException, IOException {
-        String line;
-        BufferedReader reader = new BufferedReader(new FileReader(PERFORMANCES_TEXT_FILE));
-        while ((line = reader.readLine()) != null) {
-            String[] performanceData = line.split(",");
-            DAOObras daoObras = new DAOObras();
-            Obra obra = daoObras.consultar(performanceData[0]);
-            String fecha = performanceData[1];
-            String hora = performanceData[2];
-            Funcion funcion = new Funcion(obra, fecha, hora);
-            this.funciones.add(funcion);
-        }
-    }
-
     public void updateDBFile() {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(PERFORMANCES_TEXT_FILE));
@@ -107,5 +107,18 @@ public class DAOFunciones {
             nombreFunciones.add(funcion.getObra().getNombre());
         }
         return nombreFunciones;
+    }
+
+    public void eliminarFuncionesDeUnaObra(Obra obra) {
+        ArrayList<Funcion> nuevas_funciones = new ArrayList<>();
+        for (Funcion funcion : this.funciones) {
+            if (funcion.getObra().getNombre().equals(obra.getNombre())) {
+                continue;
+            } else {
+                nuevas_funciones.add(funcion);
+            }
+        }
+        this.funciones = nuevas_funciones;
+        updateDBFile();
     }
 }

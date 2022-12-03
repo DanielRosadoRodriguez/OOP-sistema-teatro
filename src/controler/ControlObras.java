@@ -61,7 +61,7 @@ public class ControlObras implements ActionListener{
            // Se crea el objeto DAO para buscar la obra en el archivo .TXT
             DAOObras daoObras = new DAOObras();
             try{
-                Obra obras = daoObras.consultar(nombre);
+                Obra obras = daoObras.getObra(nombre);
                 
                 if (obras!=null){
                     adminCRUDObras.getNombreObra().setText(obras.getNombre());
@@ -108,7 +108,7 @@ public class ControlObras implements ActionListener{
            // Se crea el objeto DAO para buscar el libro en el archivo .TXT
             DAOObras daoObras = new DAOObras();
             try{
-                Obra obra = daoObras.consultar(nombre);
+                Obra obra = daoObras.getObra(nombre);
                 if(obra != null){
                     daoObras.eliminar(obra);
                 }else {

@@ -36,7 +36,7 @@ public class ControlFunciones implements ActionListener {
         ControlObras control_obra = new ControlObras(modeloObras);
         Obra obra;
         DAOObras dao_obras = new DAOObras();
-        obra = dao_obras.consultar(nombre_obra);
+        obra = dao_obras.getObra(nombre_obra);
         return obra;
     }
 
@@ -80,7 +80,7 @@ public class ControlFunciones implements ActionListener {
             modeloFuncion.setFecha_presentacion(vistaCRUDFuncion.getTxtFecha().getText());
             modeloFuncion.setHora_presentacion(vistaCRUDFuncion.getTxtHora().getText());
             DAOObras daoObras = new DAOObras();
-            Obra obra = daoObras.consultar(vistaCRUDFuncion.getTxtNombreObra().getText());
+            Obra obra = daoObras.getObra(vistaCRUDFuncion.getTxtNombreObra().getText());
             modeloFuncion.setObra(obra);
             DAOFunciones daoFunciones = new DAOFunciones();
             try {

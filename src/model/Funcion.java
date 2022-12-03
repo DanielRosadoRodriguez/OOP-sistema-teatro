@@ -9,12 +9,13 @@ public class Funcion {
     private String fecha_presentacion;
     private String hora_presentacion;
     private ArrayList<Seat> seats;
-
+    private Double price;
+    
     public Funcion(Obra obra, String fecha_presentacion, String hora_presentacion) {
         this.obra = obra;
         this.fecha_presentacion = fecha_presentacion;
         this.hora_presentacion = hora_presentacion;
-        generateSeats();
+        initSeats();
         //TODO: generar asientos
     }
 
@@ -22,7 +23,7 @@ public class Funcion {
 
     }
 
-    public void generateSeats() {
+    public void initSeats() {
 //TOOD
     }
 

@@ -49,10 +49,10 @@ public class DAOFunciones {
             }
 
             DAOObras daoObras = new DAOObras();
-            String id = performanceData[0];
-            Obra obra = daoObras.getObra(performanceData[1]);
-            String fecha = performanceData[2];
-            String hora = performanceData[3];
+            String id = splitBasicInfo[0];
+            Obra obra = daoObras.getObra(splitBasicInfo[1]);
+            String fecha = splitBasicInfo[2];
+            String hora = splitBasicInfo[3];
             Funcion funcion = new Funcion(id, obra, fecha, hora, performanceSeats);
             this.funciones.add(funcion);
         }
@@ -119,7 +119,7 @@ public class DAOFunciones {
                 for (int i = 0; i < seats.size(); i++) {
                     seatsInformation = seatsInformation + (i + "-" + seats.get(i).getStatus() + ",");
                 }
-                writer.write(funcion.getObra().getNombre() + "," + funcion.getFecha_presentacion() + "," + funcion.getHora_presentacion()
+                writer.write(funcion.getId() + "," + funcion.getObra().getNombre() + "," + funcion.getFecha_presentacion() + "," + funcion.getHora_presentacion()
                         +";"+ seatsInformation + "\n");
             }
             writer.close();

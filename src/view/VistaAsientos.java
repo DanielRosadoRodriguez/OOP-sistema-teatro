@@ -11,6 +11,14 @@ package view;
  */
 public class VistaAsientos extends javax.swing.JFrame {
 
+    public javax.swing.JButton getButtonConfirmar() {
+        return buttonConfirmar;
+    }
+
+    public void setButtonConfirmar(javax.swing.JButton buttonConfirmar) {
+        this.buttonConfirmar = buttonConfirmar;
+    }
+
     public javax.swing.JComboBox<String> getjComboBox1() {
         return performancesComboBox;
     }
@@ -212,11 +220,11 @@ public class VistaAsientos extends javax.swing.JFrame {
     }
 
     public javax.swing.JButton getjButton31() {
-        return jButton31;
+        return getButtonConfirmar();
     }
 
     public void setjButton31(javax.swing.JButton jButton31) {
-        this.jButton31 = jButton31;
+        this.setButtonConfirmar(jButton31);
     }
 
     public javax.swing.JButton getjButton4() {
@@ -308,7 +316,7 @@ public class VistaAsientos extends javax.swing.JFrame {
         jButton12 = new javax.swing.JButton();
         jButton13 = new javax.swing.JButton();
         jButton14 = new javax.swing.JButton();
-        jButton31 = new javax.swing.JButton();
+        buttonConfirmar = new javax.swing.JButton();
         jButton29 = new javax.swing.JButton();
         jButton30 = new javax.swing.JButton();
         jButton28 = new javax.swing.JButton();
@@ -425,14 +433,14 @@ public class VistaAsientos extends javax.swing.JFrame {
         jButton14.setForeground(new java.awt.Color(0, 184, 192));
         jButton14.setBorder(null);
 
-        jButton31.setBackground(new java.awt.Color(245, 224, 220));
-        jButton31.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        jButton31.setForeground(new java.awt.Color(17, 17, 27));
-        jButton31.setText("Confirmar");
-        jButton31.setBorder(null);
-        jButton31.addActionListener(new java.awt.event.ActionListener() {
+        buttonConfirmar.setBackground(new java.awt.Color(245, 224, 220));
+        buttonConfirmar.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
+        buttonConfirmar.setForeground(new java.awt.Color(17, 17, 27));
+        buttonConfirmar.setText("Confirmar");
+        buttonConfirmar.setBorder(null);
+        buttonConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton31ActionPerformed(evt);
+                buttonConfirmarActionPerformed(evt);
             }
         });
 
@@ -600,7 +608,7 @@ public class VistaAsientos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(35, 35, 35)
-                        .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(buttonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -685,7 +693,7 @@ public class VistaAsientos extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jButton30, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton31, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(buttonConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9))
                         .addGap(11, 11, 11))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -716,9 +724,9 @@ public class VistaAsientos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton31ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton31ActionPerformed
+    private void buttonConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonConfirmarActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton31ActionPerformed
+    }//GEN-LAST:event_buttonConfirmarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -761,6 +769,7 @@ public class VistaAsientos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton buttonConfirmar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
@@ -785,7 +794,6 @@ public class VistaAsientos extends javax.swing.JFrame {
     private javax.swing.JButton jButton29;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton30;
-    private javax.swing.JButton jButton31;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

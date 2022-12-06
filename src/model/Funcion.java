@@ -17,20 +17,19 @@ public class Funcion {
         this.obra = obra;
         this.fecha_presentacion = fecha_presentacion;
         this.hora_presentacion = hora_presentacion;
-        //TODO: generar asientos
         initSeats();
         this.id = generarId();
     }
 
     public Funcion() {
         initSeats();
+        this.id = generarId();
     }
 
     public Funcion(String id, Obra obra, String fecha_presentacion, String hora_presentacion, ArrayList<Seat> seats) {
         this.obra = obra;
         this.fecha_presentacion = fecha_presentacion;
         this.hora_presentacion = hora_presentacion;
-        //TODO: generar asientos
         this.seats = seats;
         this.id = generarId();
     }
@@ -42,9 +41,8 @@ public class Funcion {
 
     public void initSeats() {
         for (int i = 0; i <= 24; i++) {
-            
             Seat seat = new Seat();
-            System.out.println(i + " "+ seat);
+            System.out.println(i + " " + seat);
             this.seats.add(seat);
         }
     }

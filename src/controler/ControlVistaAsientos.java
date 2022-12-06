@@ -22,18 +22,20 @@ public class ControlVistaAsientos implements ActionListener {
     private Seat seat;
     private ArrayList<Seat> seats = new ArrayList<>();
     private ArrayList<JButton> buttons = new ArrayList<>();
-
+    private Funcion funcionActual;
+    private int indexFuncion;
     public ControlVistaAsientos(VistaAsientos view, ArrayList<Seat> seats) {
         this.view = view;
         this.seats = seats;
         this.view.getjButton1().addActionListener(this);
         this.view.getjComboBox1().addActionListener(this);
+        this.view.getButtonConfirmar().addActionListener(this);
         initButtons();
         setSeatColor();
         configureComboBox();
         addActionListenersToButtons();
     }
-
+    
     @Override
     public void actionPerformed(ActionEvent e) {
         for (int i = 0; i <= this.buttons.size(); i++) {
@@ -49,10 +51,19 @@ public class ControlVistaAsientos implements ActionListener {
             int performanceIndex = this.view.getjComboBox1().getSelectedIndex();
             DAOFunciones daoFunciones = new DAOFunciones();
             try {
-                System.out.println(daoFunciones.buscarFuncion(performanceIndex).getObra().getNombre());
+                this.funcionActual = daoFunciones.buscarFuncion(performanceIndex);
+                this.seats = this.funcionActual.getSeats();
+                setSeatColor();
             } catch (NotFoundPerformanceException ex) {
                 Logger.getLogger(ControlVistaAsientos.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        if (this.view.getButtonConfirmar() == e.getSource()){
+            changeSeatStatusToOccupied();
+            this.funcionActual.setSeats(this.seats);
+            DAOFunciones daoFunciones = new DAOFunciones();
+            daoFunciones.modificarFuncion(this.funcionActual);
+            
         }
     }
 
@@ -64,7 +75,13 @@ public class ControlVistaAsientos implements ActionListener {
             seat.setStatus("available");
         }
     }
-
+    public void changeSeatStatusToOccupied(){
+        for(Seat seat: this.seats){
+            if(seat.getStatus().equals("selected")){
+                seat.setStatus("occupied");
+            }
+        }
+    }
     public void setSeatColor() {
         try {
             for (int i = 0; i <= this.buttons.size(); i++) {

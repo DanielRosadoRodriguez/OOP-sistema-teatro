@@ -1,2 +1,1 @@
-hamilton,feacha,hora
-Blancanieves,fecha chisyosa,hora chisyosa
+hamilton,asdf,asdfasdf;0-available,1-available,2-available,3-available,4-available,5-available,6-available,7-available,8-available,9-available,10-available,11-available,12-available,13-available,14-available,15-available,16-available,17-available,18-available,19-available,20-available,21-available,22-available,23-available,24-available,

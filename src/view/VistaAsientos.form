@@ -176,7 +176,7 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="performancesComboBox" min="-2" pref="124" max="-2" attributes="0"/>
+                          <Component id="performancesComboBox" min="-2" pref="213" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                           <Component id="jButton27" min="-2" pref="39" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>

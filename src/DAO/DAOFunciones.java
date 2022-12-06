@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import model.Funcion;
 import model.Obra;
+import model.Seat;
 
 public class DAOFunciones {
 
@@ -32,12 +33,27 @@ public class DAOFunciones {
         String line;
         BufferedReader reader = new BufferedReader(new FileReader(PERFORMANCES_TEXT_FILE));
         while ((line = reader.readLine()) != null) {
-            String[] performanceData = line.split(",");
+            String[] performanceData = line.split(";");
+            String basicInfo = performanceData[0];
+            String seatsInfo = performanceData[1];
+
+            String[] splitBasicInfo = basicInfo.split(",");
+            String[] splitSeatInfo = seatsInfo.split(",");
+            ArrayList<Seat> performanceSeats = new ArrayList<>();
+            for (String seatInfo : splitSeatInfo) {
+                String[] currentSeatInfo = seatInfo.split("-");
+                String id = currentSeatInfo[0];
+                String status = currentSeatInfo[1];
+                Seat currentSeat = new Seat(id, status);
+                performanceSeats.add(currentSeat);
+            }
+
             DAOObras daoObras = new DAOObras();
-            Obra obra = daoObras.getObra(performanceData[0]);
-            String fecha = performanceData[1];
-            String hora = performanceData[2];
-            Funcion funcion = new Funcion(obra, fecha, hora);
+            String id = performanceData[0];
+            Obra obra = daoObras.getObra(performanceData[1]);
+            String fecha = performanceData[2];
+            String hora = performanceData[3];
+            Funcion funcion = new Funcion(id, obra, fecha, hora, performanceSeats);
             this.funciones.add(funcion);
         }
     }
@@ -47,9 +63,9 @@ public class DAOFunciones {
         updateDBFile();
     }
 
-    public void eliminarFuncion(String nombreFuncion) {
+    public void eliminarFuncion(String idFuncion) {
         try {
-            Funcion funcion = buscarFuncion(nombreFuncion);
+            Funcion funcion = buscarFuncion(idFuncion);
             eliminarFuncion(funcion);
         } catch (NotFoundPerformanceException e) {
             System.out.print(e.getMessage());
@@ -63,20 +79,29 @@ public class DAOFunciones {
 
     public void modificarFuncion(Funcion funcion) {
         try {
-            Funcion db_funcion = buscarFuncion(funcion.getObra().getNombre());
+            Funcion db_funcion = buscarFuncion(funcion.getId());
             int index = getPerformanceIndex(db_funcion);
             this.funciones.set(index, funcion);
         } catch (NotFoundPerformanceException e) {
-            System.out.print(e.getMessage());
         }
         updateDBFile();
     }
 
-    public Funcion buscarFuncion(String nombreFuncion) throws NotFoundPerformanceException {
-        for (Funcion funcion : this.funciones) {
-            if (funcion.getObra().getNombre().equals(nombreFuncion)) {
+    public Funcion buscarFuncion(int index) throws NotFoundPerformanceException {
+        try {
+            return this.funciones.get(index);
+        } catch (Exception e) {
+        }
+        throw new NotFoundPerformanceException("No se encontro la funcion");
+    }
+
+    public Funcion buscarFuncion(String id) throws NotFoundPerformanceException {
+        try {
+            for (Funcion funcion : this.funciones) {
+                if (funcion.getId().equals(id));
                 return funcion;
             }
+        } catch (Exception e) {
         }
         throw new NotFoundPerformanceException("No se encontro la funcion");
     }
@@ -89,7 +114,13 @@ public class DAOFunciones {
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(PERFORMANCES_TEXT_FILE));
             for (Funcion funcion : this.funciones) {
-                writer.write(funcion.getObra().getNombre() + "," + funcion.getFecha_presentacion() + "," + funcion.getHora_presentacion() + "\n");
+                ArrayList<Seat> seats = funcion.getSeats();
+                String seatsInformation = new String();
+                for (int i = 0; i < seats.size(); i++) {
+                    seatsInformation = seatsInformation + (i + "-" + seats.get(i).getStatus() + ",");
+                }
+                writer.write(funcion.getObra().getNombre() + "," + funcion.getFecha_presentacion() + "," + funcion.getHora_presentacion()
+                        +";"+ seatsInformation + "\n");
             }
             writer.close();
         } catch (IOException e) {
@@ -101,12 +132,13 @@ public class DAOFunciones {
         return this.funciones;
     }
 
-    public ArrayList<String> gerPerformancesName() {
-        ArrayList<String> nombreFunciones = new ArrayList<>();
+    public ArrayList<String> gerFormattedPerformancesInformation() {
+        ArrayList<String> formattedPerformancesInformation = new ArrayList<>();
         for (Funcion funcion : this.funciones) {
-            nombreFunciones.add(funcion.getObra().getNombre());
+            String formattedPerformance = funcion.getObra().getNombre() + "-" + funcion.getFecha_presentacion() + "-" + funcion.getHora_presentacion();
+            formattedPerformancesInformation.add(formattedPerformance);
         }
-        return nombreFunciones;
+        return formattedPerformancesInformation;
     }
 
     public void eliminarFuncionesDeUnaObra(Obra obra) {

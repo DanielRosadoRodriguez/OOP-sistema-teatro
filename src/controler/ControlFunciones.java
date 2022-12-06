@@ -15,11 +15,11 @@ import view.EmpleadoMainWindow;
 
 public class ControlFunciones implements ActionListener {
 
-    private Funcion modeloFuncion;
+    
     private Obra modeloObras;
     private AdminCRUDFuncion vistaCRUDFuncion;
     private boolean esAdmin;
-
+    private Funcion modeloFuncion;
     ControlFunciones(Funcion modeloFuncion, Obra modeloObras, AdminCRUDFuncion adminCRUDFuncion, boolean esAdmin) {
         this.modeloFuncion = modeloFuncion;
         this.modeloObras = modeloObras;
@@ -41,13 +41,14 @@ public class ControlFunciones implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent evento) {
+       
         if (vistaCRUDFuncion.getAniadirFuncion() == evento.getSource()) {
             System.out.println("Queremos agregar funcion");
             Obra obra = buscarObras(vistaCRUDFuncion.getTxtNombreObra().getText());
             System.out.println(obra);
-            modeloFuncion.setObra(obra);
-            modeloFuncion.setFecha_presentacion(vistaCRUDFuncion.getTxtFecha().getText());
-            modeloFuncion.setHora_presentacion(vistaCRUDFuncion.getTxtHora().getText());
+            this.modeloFuncion.setObra(obra);
+            this.modeloFuncion.setFecha_presentacion(vistaCRUDFuncion.getTxtFecha().getText());
+            this.modeloFuncion.setHora_presentacion(vistaCRUDFuncion.getTxtHora().getText());
 
             DAOFunciones daoFuncion = new DAOFunciones();
             try {

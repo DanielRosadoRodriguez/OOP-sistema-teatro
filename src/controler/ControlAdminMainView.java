@@ -3,6 +3,7 @@ package controler;
 import controler.ControlObras;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import model.Admin;
 import model.Empleado;
 import model.Funcion;
@@ -79,8 +80,12 @@ public class ControlAdminMainView implements ActionListener {
 
     private void initializeSeatView() {
         VistaAsientos seatView = new VistaAsientos();
-        Seat seat = new Seat();
-        ControlVistaAsientos control = new ControlVistaAsientos(seatView, seat);
+        ArrayList<Seat> seats = new ArrayList<>();
+        for (int i = 0; i <= 26; i++) {
+            Seat seat = new Seat();
+            seats.add(seat);
+        }
+        ControlVistaAsientos control = new ControlVistaAsientos(seatView, seats);
         setupNewView(seatView);
     }
 

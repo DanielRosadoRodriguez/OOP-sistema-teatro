@@ -2,11 +2,14 @@ package controler;
 
 import DAO.DAOFunciones;
 import DAO.DAOFunciones;
+import errores.NotFoundPerformanceException;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import model.Funcion;
@@ -39,7 +42,17 @@ public class ControlVistaAsientos implements ActionListener {
                     changeSeatStatus(seats.get(i));
                     setSeatColor();
                 }
-            } catch (IndexOutOfBoundsException er) {}
+            } catch (IndexOutOfBoundsException er) {
+            }
+        }
+        if (this.view.getjComboBox1() == e.getSource()){
+            int performanceIndex = this.view.getjComboBox1().getSelectedIndex();
+            DAOFunciones daoFunciones = new DAOFunciones();
+            try {
+                System.out.println(daoFunciones.buscarFuncion(performanceIndex).getObra().getNombre());
+            } catch (NotFoundPerformanceException ex) {
+                Logger.getLogger(ControlVistaAsientos.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
@@ -69,15 +82,15 @@ public class ControlVistaAsientos implements ActionListener {
     }
 
     public DefaultComboBoxModel<String> generateComboBoxModel() {
-        ArrayList<String> raw_performances = requestPerformancesName();
+        ArrayList<String> raw_performances = gerFormattedPerformancesInformation();
         String[] performances = raw_performances.toArray(new String[0]);
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(performances);
         return model;
     }
 
-    public ArrayList<String> requestPerformancesName() {
+    public ArrayList<String> gerFormattedPerformancesInformation() {
         DAOFunciones dao = new DAOFunciones();
-        return dao.gerPerformancesName();
+        return dao.gerFormattedPerformancesInformation();
     }
 
     public void initButtons() {

@@ -39,7 +39,7 @@ public class ControlObras implements ActionListener{
             modeloObras.setPrimerActor(adminCRUDObras.getPrimerActor().getText());
             modeloObras.setSegundoActor(adminCRUDObras.getSegundoActor().getText());
             modeloObras.setResumen(adminCRUDObras.getResumenObra().getText());
-            modeloObras.setGenero(adminCRUDObras.getGeneroObra().getText());
+            modeloObras.setGenero(adminCRUDObras.getGeneroObra().getSelectedItem().toString());
             int duracionObra = Integer.parseInt(adminCRUDObras.getDuracionObra().getText());
             modeloObras.setDuracion(duracionObra);
             double precioObra = Double.parseDouble(adminCRUDObras.getPrecioObra().getText());
@@ -67,7 +67,7 @@ public class ControlObras implements ActionListener{
                     adminCRUDObras.getNombreObra().setText(obras.getNombre());
                     adminCRUDObras.getPrimerActor().setText(obras.getPrimerActor());
                     adminCRUDObras.getSegundoActor().setText(obras.getSegundoActor());
-                    adminCRUDObras.getGeneroObra().setText(obras.getGenero());
+                    adminCRUDObras.getGeneroObra().setSelectedItem(obras.getGenero());
                     adminCRUDObras.getResumenObra().setText(obras.getResumen());
                     adminCRUDObras.getPrecioObra().setText(String.valueOf(obras.getPrecio()));
                     adminCRUDObras.getDuracionObra().setText(String.valueOf(obras.getDuracion()));
@@ -85,7 +85,7 @@ public class ControlObras implements ActionListener{
             modeloObras.setNombre(adminCRUDObras.getNombreObra().getText());
             modeloObras.setPrimerActor(adminCRUDObras.getPrimerActor().getText());
             modeloObras.setSegundoActor(adminCRUDObras.getSegundoActor().getText());
-            modeloObras.setGenero(adminCRUDObras.getGeneroObra().getText());
+            modeloObras.setGenero(adminCRUDObras.getGeneroObra().getSelectedItem().toString());
             modeloObras.setResumen(adminCRUDObras.getResumenObra().getText());
             double precio = Double.parseDouble(adminCRUDObras.getPrecioObra().getText());
             modeloObras.setPrecio(precio);

@@ -1,12 +1,12 @@
 package model;
 
-public class CoordenateSeat {
+public class SeatCoordinate {
 
     private int row;
     private int column;
-    private char zone;
+    private int zone;
 
-    public CoordenateSeat(int row, int column, char zone) {
+    public SeatCoordinate(int row, int column, int zone) {
         this.row = row;
         this.column = column;
         this.zone = zone;
@@ -28,11 +28,11 @@ public class CoordenateSeat {
         this.column = column;
     }
 
-    public char getZone() {
+    public int getZone() {
         return zone;
     }
 
-    public void setZone(char zone) {
+    public void setZone(int zone) {
         this.zone = zone;
     }
 

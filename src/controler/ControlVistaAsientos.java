@@ -3,6 +3,7 @@ package controler;
 import DAO.DAOFunciones;
 import DAO.DAOFunciones;
 import errores.NotFoundPerformanceException;
+import errores.UnexpectedButtonException;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,6 +15,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import model.Funcion;
 import model.Seat;
+import model.SeatCoordinate;
 import model.Ticket;
 import view.VistaAsientos;
 import view.VistaResumen;
@@ -44,7 +46,14 @@ public class ControlVistaAsientos implements ActionListener {
         for (int i = 0; i <= this.buttons.size(); i++) {
             try {
                 if (this.buttons.get(i) == e.getSource()) {
-                    changeSeatStatus(seats.get(i));
+                    changeSeatStatus(this.seats.get(i));
+                    try {
+                        SeatCoordinate coordinate = determineSeatCoordinate(this.buttons.get(i));
+                        this.seats.get(i).setCoordenate(coordinate);
+                        System.out.println(this.seats.get(i).getCoordenate().getZone());
+                    } catch (UnexpectedButtonException ex) {
+
+                    }
                     setSeatColor();
                 }
             } catch (IndexOutOfBoundsException er) {
@@ -62,23 +71,110 @@ public class ControlVistaAsientos implements ActionListener {
             }
         }
         if (this.view.getButtonConfirmar() == e.getSource()) {
-            Ticket ticket = new Ticket(saveSelectedSeats(), this.funcionActual);
-            VistaResumen vista = new VistaResumen();
-            ControlResumen control = new ControlResumen(ticket, vista);
-            vista.setVisible(true);
-            this.view.setVisible(false);
-            changeSeatStatusToOccupied();
-            this.funcionActual.setSeats(this.seats);
-            DAOFunciones daoFunciones = new DAOFunciones();
-            daoFunciones.modificarFuncion(this.funcionActual);
+            try {
+                Ticket ticket = new Ticket(saveSelectedSeats(), this.funcionActual);
+                VistaResumen vista = new VistaResumen();
+                ControlResumen control = new ControlResumen(ticket, vista);
+                vista.setVisible(true);
+                this.view.setVisible(false);
+                changeSeatStatusToOccupied();
+                this.funcionActual.setSeats(this.seats);
+                DAOFunciones daoFunciones = new DAOFunciones();
+                daoFunciones.modificarFuncion(this.funcionActual);
+            }
+            catch(NullPointerException ex){
+                ex.getStackTrace();
+            }
+
         }
+    }
+
+    public SeatCoordinate determineSeatCoordinate(JButton button) throws UnexpectedButtonException {
+        //----------SECCION B----------//
+        if (button.equals(this.view.getjButton3())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(1, 1, 2);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton4())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(1, 2, 2);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton5())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(2, 1, 2);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton6())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(2, 2, 2);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton8())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(3, 1, 2);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton7())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(3, 2, 2);
+            return seatCoordinate;
+        } //----------SECCION C----------//
+        else if (button.equals(this.view.getjButton13())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(1, 1, 3);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton25())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(1, 2, 3);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton23())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(2, 1, 3);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton16())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(2, 2, 3);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton14())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(3, 1, 3);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton10())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(3, 2, 3);
+            return seatCoordinate;
+        } //----------SECCION A----------//
+        else if (button.equals(this.view.getjButton15())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(1, 1, 1);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton19())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(1, 2, 1);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton17())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(1, 3, 1);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton22())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(1, 4, 1);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton12())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(2, 1, 1);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton26())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(2, 2, 1);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton11())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(2, 3, 1);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton24())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(2, 4, 1);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton20())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(3, 1, 1);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton18())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(3, 2, 1);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton9())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(3, 3, 1);
+            return seatCoordinate;
+        } else if (button.equals(this.view.getjButton21())) {
+            SeatCoordinate seatCoordinate = new SeatCoordinate(3, 4, 1);
+            return seatCoordinate;
+        }
+        throw new UnexpectedButtonException();
     }
 
     public ArrayList<Seat> saveSelectedSeats() {
         ArrayList<Seat> selectedSeats = new ArrayList<>();
         for (Seat seat : this.seats) {
-            if (seat.getStatus().equals("selected")){
-            selectedSeats.add(seat);
+            if (seat.getStatus().equals("selected")) {
+                System.out.println("seccion: " + seat.getCoordenate().getZone() + "precio: " + seat.getPrice());
+                selectedSeats.add(seat);
             }
         }
         return selectedSeats;

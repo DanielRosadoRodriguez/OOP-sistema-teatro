@@ -322,7 +322,7 @@ public class AdminMainWindow extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JTextField jTextField1;
     public javax.swing.JButton modificarObra;
-    public javax.swing.JButton modificar_funciones;
+    private javax.swing.JButton modificar_funciones;
     public javax.swing.JButton modificar_usuarios;
     public javax.swing.JButton venderBoleto;
     // End of variables declaration//GEN-END:variables

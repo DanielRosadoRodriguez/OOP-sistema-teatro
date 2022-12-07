@@ -5,6 +5,40 @@ import javax.swing.JTextField;
 
 public class AdminCRUDFuncion extends javax.swing.JFrame {
 
+    public javax.swing.JComboBox<String> getBuscarComboBox() {
+        return buscarComboBox;
+    }
+
+    public void setBuscarComboBox(javax.swing.JComboBox<String> buscarComboBox) {
+        this.buscarComboBox = buscarComboBox;
+    }
+
+    public com.toedter.calendar.JDateChooser getDataChooserFecha() {
+        return dataChooserFecha;
+    }
+
+    public void setDataChooserFecha(com.toedter.calendar.JDateChooser dataChooserFecha) {
+        this.dataChooserFecha = dataChooserFecha;
+    }
+
+    public javax.swing.JComboBox<String> getHoraComboBox() {
+        return horaComboBox;
+    }
+
+    public void setHoraComboBox(javax.swing.JComboBox<String> horaComboBox) {
+        this.horaComboBox = horaComboBox;
+    }
+
+    public javax.swing.JTextField getFechaTxtprovisional() {
+        return fechaTxtprovisional;
+    }
+
+    public void setFechaTxtprovisional(javax.swing.JTextField fechaTxtprovisional) {
+        this.fechaTxtprovisional = fechaTxtprovisional;
+    }
+
+   
+
     public javax.swing.JButton getRegresarBtn() {
         return regresarBtn;
     }
@@ -13,14 +47,9 @@ public class AdminCRUDFuncion extends javax.swing.JFrame {
         this.regresarBtn = regresarBtn;
     }
 
-    public javax.swing.JTextField getTxtFecha() {
-        return txtFecha;
-    }
+   
 
-    public javax.swing.JTextField getTxtHora() {
-        return txtHora;
-    }
-
+ 
     public javax.swing.JTextField getTxtNombreObra() {
         return txtNombreObra;
     }
@@ -71,15 +100,18 @@ public class AdminCRUDFuncion extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         regresarBtn = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
         jLabel14 = new javax.swing.JLabel();
-        txtHora = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
         txtNombreObra = new javax.swing.JTextField();
         aniadirFuncion = new javax.swing.JButton();
         modificarFuncion = new javax.swing.JButton();
         buscarFuncion = new javax.swing.JButton();
         eliminarFuncion = new javax.swing.JButton();
+        fechaTxtprovisional = new javax.swing.JTextField();
+        horaComboBox = new javax.swing.JComboBox<>();
+        buscarComboBox = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        dataChooserFecha = new com.toedter.calendar.JDateChooser();
 
         jButton3.setText("Añadir Usuario");
 
@@ -244,23 +276,9 @@ public class AdminCRUDFuncion extends javax.swing.JFrame {
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Fecha presentación");
 
-        txtFecha.setText("dd/mm/yy");
-        txtFecha.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaActionPerformed(evt);
-            }
-        });
-
         jLabel14.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Hora presentación");
-
-        txtHora.setText("00:00 ");
-        txtHora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtHoraActionPerformed(evt);
-            }
-        });
 
         jLabel15.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
@@ -316,36 +334,54 @@ public class AdminCRUDFuncion extends javax.swing.JFrame {
             }
         });
 
+        fechaTxtprovisional.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                fechaTxtprovisionalActionPerformed(evt);
+            }
+        });
+
+        horaComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "17:00", "20:00 pm" }));
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("ID para buscar");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txtNombreObra, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                    .addComponent(regresarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(jLabel2))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel14)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel13)
-                                    .addComponent(jLabel15))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel3)
+                                .addGap(0, 39, Short.MAX_VALUE))
+                            .addComponent(buscarComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtNombreObra, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(regresarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel2))))
+                                .addComponent(jLabel13)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(dataChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel14)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(horaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(fechaTxtprovisional, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(aniadirFuncion)
@@ -354,8 +390,11 @@ public class AdminCRUDFuncion extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(buscarFuncion)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(eliminarFuncion)))
-                .addContainerGap(32, Short.MAX_VALUE))
+                        .addComponent(eliminarFuncion))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(jLabel4)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -366,25 +405,30 @@ public class AdminCRUDFuncion extends javax.swing.JFrame {
                     .addComponent(regresarBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel4)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(7, 7, 7)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(txtNombreObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(37, 37, 37)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtNombreObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(buscarComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(fechaTxtprovisional, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(dataChooserFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel13)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel14)
-                    .addComponent(txtHora, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(horaComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(aniadirFuncion)
                     .addComponent(modificarFuncion)
                     .addComponent(buscarFuncion)
                     .addComponent(eliminarFuncion))
-                .addContainerGap(12, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -392,28 +436,20 @@ public class AdminCRUDFuncion extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoraActionPerformed
-        
-    }//GEN-LAST:event_txtHoraActionPerformed
-
-    private void txtFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaActionPerformed
 
     private void regresarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarBtnActionPerformed
         // TODO add your handling code here:
@@ -455,6 +491,10 @@ public class AdminCRUDFuncion extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_eliminarFuncionActionPerformed
 
+    private void fechaTxtprovisionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fechaTxtprovisionalActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_fechaTxtprovisionalActionPerformed
+
     public void setAniadirFuncion(JButton aniadirFuncion) {
         this.aniadirFuncion = aniadirFuncion;
     }
@@ -471,13 +511,8 @@ public class AdminCRUDFuncion extends javax.swing.JFrame {
         this.modificarFuncion = modificarFuncion;
     }
 
-    public void setTxtFecha(JTextField txtFecha) {
-        this.txtFecha = txtFecha;
-    }
 
-    public void setTxtHora(JTextField txtHora) {
-        this.txtHora = txtHora;
-    }
+
 
     public void setTxtNombreObra(JTextField txtNombreObra) {
         this.txtNombreObra = txtNombreObra;
@@ -516,8 +551,12 @@ public class AdminCRUDFuncion extends javax.swing.JFrame {
     public javax.swing.JButton aniadirUsuario11;
     public javax.swing.JButton aniadirUsuario8;
     public javax.swing.JButton aniadirUsuario9;
+    public javax.swing.JComboBox<String> buscarComboBox;
     public javax.swing.JButton buscarFuncion;
+    public com.toedter.calendar.JDateChooser dataChooserFecha;
     public javax.swing.JButton eliminarFuncion;
+    public javax.swing.JTextField fechaTxtprovisional;
+    public javax.swing.JComboBox<String> horaComboBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -533,6 +572,7 @@ public class AdminCRUDFuncion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
@@ -557,8 +597,6 @@ public class AdminCRUDFuncion extends javax.swing.JFrame {
     private java.awt.MenuBar menuBar5;
     public javax.swing.JButton modificarFuncion;
     public javax.swing.JButton regresarBtn;
-    public javax.swing.JTextField txtFecha;
-    public javax.swing.JTextField txtHora;
     public javax.swing.JTextField txtNombreObra;
     // End of variables declaration//GEN-END:variables
 }

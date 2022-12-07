@@ -3,12 +3,15 @@ package controler;
 import controler.ControlObras;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import model.Funcion;
 import model.Obra;
+import model.Seat;
 import model.Usuario;
 import view.AdminCRUDFuncion;
 import view.EmpleadoMainWindow;
 import view.AdminCRUDObras;
+import view.VistaAsientos;
 import view.VistaLogIn;
 
 public class ControlEmpleadoMainWindow implements ActionListener {
@@ -19,6 +22,7 @@ public class ControlEmpleadoMainWindow implements ActionListener {
         this.vista = vista;
         this.vista.getModificarObra().addActionListener(this);
         this.vista.getModificarFuncion().addActionListener(this);
+        this.vista.getVenderBoleto().addActionListener(this);
         this.vista.getCerrarSesion().addActionListener(this);
     }
 
@@ -43,8 +47,11 @@ public class ControlEmpleadoMainWindow implements ActionListener {
             ControlFunciones controlFuncion = new ControlFunciones(modeloFuncion, modeloObras, adminCRUDFuncion, esAdmin);
             adminCRUDFuncion.setVisible(true);
             adminCRUDFuncion.setLocationRelativeTo(null);
-            this.vista.setVisible(false);
-        
+            this.vista.setVisible(false);   
+        }
+        else if (this.vista.getVenderBoleto()== e.getSource()){
+                initializeSeatView();
+                
         }else if(this.vista.getCerrarSesion() == e.getSource()){
             System.out.println("Cerrando sesión");
             Usuario modeloUsuario = new Usuario();
@@ -54,6 +61,22 @@ public class ControlEmpleadoMainWindow implements ActionListener {
             vista_log_in.setLocationRelativeTo(null);
             this.vista.setVisible(false);
         }
+    }
+    
+    private void initializeSeatView() {
+        VistaAsientos seatView = new VistaAsientos();
+        ArrayList<Seat> seats = new ArrayList<>();
+        for (int i = 0; i <= 26; i++) {
+            Seat seat = new Seat();
+            seats.add(seat);
+        }
+        ControlVistaAsientos control = new ControlVistaAsientos(seatView, seats);
+        setupNewView(seatView);
+    }
+    
+    private void setupNewView(javax.swing.JFrame vista) {
+        vista.setVisible(true);
+        vista.setLocationRelativeTo(null);
     }
 
 }

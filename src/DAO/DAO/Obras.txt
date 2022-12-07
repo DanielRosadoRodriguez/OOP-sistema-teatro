@@ -1,7 +1,0 @@
-hamilton,lin manuel miranda,philipa soo,historica,adsfasdf,10.0,10
-heathers,Annaleigh Ashford,Jeremy Jordania,Tragedia ,654,654.0,1
-la sirenitA,la roK,nick fiuri,no binarie,peli xida,10.0,10
-Blancanieves,Florence Pugh,MrBeast,helicoptero apache,Zapatillas de vidrio,6.0,5
-miki,miki,mimi,Item 2,resumen,3.0,5
-El sirenito,Keanu Reeves,Chuponcito,Romance,resumen ewefefw,3.0,6
-It,el payaso,losdemas,Animada,resumen peli,3.0,6

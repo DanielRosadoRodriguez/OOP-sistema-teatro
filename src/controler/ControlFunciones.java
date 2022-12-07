@@ -9,17 +9,18 @@ import javax.swing.JPanel;
 import model.Funcion;
 import view.AdminCRUDFuncion;
 import controler.ControlObras;
+import errores.ObraNoEncontradaException;
 import model.Obra;
 import view.AdminMainWindow;
 import view.EmpleadoMainWindow;
 
 public class ControlFunciones implements ActionListener {
 
-    
     private Obra modeloObras;
     private AdminCRUDFuncion vistaCRUDFuncion;
     private boolean esAdmin;
     private Funcion modeloFuncion;
+
     ControlFunciones(Funcion modeloFuncion, Obra modeloObras, AdminCRUDFuncion adminCRUDFuncion, boolean esAdmin) {
         this.modeloFuncion = modeloFuncion;
         this.modeloObras = modeloObras;
@@ -32,62 +33,73 @@ public class ControlFunciones implements ActionListener {
         this.vistaCRUDFuncion.getRegresarBtn().addActionListener(this);
     }
 
-    public Obra buscarObras(String nombre_obra) {
+    public Obra buscarObras(String nombre_obra) throws ObraNoEncontradaException {
         ControlObras control_obra = new ControlObras(modeloObras);
         Obra obra;
         DAOObras dao_obras = new DAOObras();
         obra = dao_obras.getObra(nombre_obra);
         return obra;
+
     }
 
     public void actionPerformed(ActionEvent evento) {
-       
+        this.modeloFuncion = new Funcion();
         if (vistaCRUDFuncion.getAniadirFuncion() == evento.getSource()) {
-            System.out.println("Queremos agregar funcion");
-            Obra obra = buscarObras(vistaCRUDFuncion.getTxtNombreObra().getText());
-            System.out.println(obra);
-            this.modeloFuncion.setObra(obra);
-            this.modeloFuncion.setFecha_presentacion(vistaCRUDFuncion.getTxtFecha().getText());
-            this.modeloFuncion.setHora_presentacion(vistaCRUDFuncion.getTxtHora().getText());
-
-            DAOFunciones daoFuncion = new DAOFunciones();
             try {
-                daoFuncion.addFuncion(modeloFuncion);
-            } catch (Exception e) {
-                e.printStackTrace();
+                Obra obra = buscarObras(vistaCRUDFuncion.getTxtNombreObra().getText());
+                this.modeloFuncion.setObra(obra);
+                this.modeloFuncion.setFecha_presentacion(vistaCRUDFuncion.getTxtFecha().getText());
+                this.modeloFuncion.setHora_presentacion(vistaCRUDFuncion.getTxtHora().getText());
+                DAOFunciones daoFuncion = new DAOFunciones();
+                try {
+                    daoFuncion.addFuncion(modeloFuncion);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch (ObraNoEncontradaException e) {
+                e.getMessage();
             }
+
         }
         if (vistaCRUDFuncion.getBuscarFuncion() == evento.getSource()) {
             String nombre = vistaCRUDFuncion.getTxtNombreObra().getText();
-            Obra obra = buscarObras(nombre);
-            DAOFunciones daoFunciones = new DAOFunciones();
             try {
-                Funcion funcion = daoFunciones.buscarFuncion(nombre);
-                if (obra != null) {
-                    vistaCRUDFuncion.getTxtNombreObra().setText(obra.getNombre());
-                    vistaCRUDFuncion.getTxtFecha().setText(funcion.getFecha_presentacion());
-                    vistaCRUDFuncion.getTxtHora().setText(funcion.getHora_presentacion());
+                Obra obra = buscarObras(nombre);
+                DAOFunciones daoFunciones = new DAOFunciones();
+                try {
+                    Funcion funcion = daoFunciones.buscarFuncion(nombre);
+                    if (obra != null) {
+                        vistaCRUDFuncion.getTxtNombreObra().setText(obra.getNombre());
+                        vistaCRUDFuncion.getTxtFecha().setText(funcion.getFecha_presentacion());
+                        vistaCRUDFuncion.getTxtHora().setText(funcion.getHora_presentacion());
 
-                } else {
-                    System.out.println("Registro no encontrado");
+                    } else {
+                        System.out.println("Registro no encontrado");
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (ObraNoEncontradaException e) {
+                e.getMessage();
             }
         }
 
         if (vistaCRUDFuncion.getModificarFuncion() == evento.getSource()) {
-            System.out.println("Queremos modificar funcion");
-            modeloFuncion.setFecha_presentacion(vistaCRUDFuncion.getTxtFecha().getText());
-            modeloFuncion.setHora_presentacion(vistaCRUDFuncion.getTxtHora().getText());
-            DAOObras daoObras = new DAOObras();
-            Obra obra = daoObras.getObra(vistaCRUDFuncion.getTxtNombreObra().getText());
-            modeloFuncion.setObra(obra);
-            DAOFunciones daoFunciones = new DAOFunciones();
             try {
-                daoFunciones.modificarFuncion(modeloFuncion);
-            } catch (Exception e) {
-                e.printStackTrace();
+                System.out.println("Queremos modificar funcion");
+                modeloFuncion.setFecha_presentacion(vistaCRUDFuncion.getTxtFecha().getText());
+                modeloFuncion.setHora_presentacion(vistaCRUDFuncion.getTxtHora().getText());
+                DAOObras daoObras = new DAOObras();
+                Obra obra = daoObras.getObra(vistaCRUDFuncion.getTxtNombreObra().getText());
+                modeloFuncion.setObra(obra);
+                DAOFunciones daoFunciones = new DAOFunciones();
+                try {
+                    daoFunciones.modificarFuncion(modeloFuncion);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            } catch (ObraNoEncontradaException e) {
+                e.getMessage();
             }
         }
 

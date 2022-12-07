@@ -1,6 +1,7 @@
 package DAO;
 
 import errores.NotFoundPerformanceException;
+import errores.ObraNoEncontradaException;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -30,35 +31,40 @@ public class DAOFunciones {
     }
 
     public void readFile() throws FileNotFoundException, IOException {
-        String line;
-        BufferedReader reader = new BufferedReader(new FileReader(PERFORMANCES_TEXT_FILE));
-        while ((line = reader.readLine()) != null) {
-            String[] performanceData = line.split(";");
-            String basicInfo = performanceData[0];
-            String seatsInfo = performanceData[1];
+        try {
+            String line;
+            BufferedReader reader = new BufferedReader(new FileReader(PERFORMANCES_TEXT_FILE));
+            while ((line = reader.readLine()) != null) {
+                String[] performanceData = line.split(";");
+                String basicInfo = performanceData[0];
+                String seatsInfo = performanceData[1];
 
-            String[] splitBasicInfo = basicInfo.split(",");
-            String[] splitSeatInfo = seatsInfo.split(",");
-            ArrayList<Seat> performanceSeats = new ArrayList<>();
-            for (String seatInfo : splitSeatInfo) {
-                String[] currentSeatInfo = seatInfo.split("-");
-                String id = currentSeatInfo[0];
-                String status = currentSeatInfo[1];
-                Seat currentSeat = new Seat(id, status);
-                performanceSeats.add(currentSeat);
+                String[] splitBasicInfo = basicInfo.split(",");
+                String[] splitSeatInfo = seatsInfo.split(",");
+                ArrayList<Seat> performanceSeats = new ArrayList<>();
+                for (String seatInfo : splitSeatInfo) {
+                    String[] currentSeatInfo = seatInfo.split("-");
+                    String id = currentSeatInfo[0];
+                    String status = currentSeatInfo[1];
+                    Seat currentSeat = new Seat(id, status);
+                    performanceSeats.add(currentSeat);
+                }
+
+                DAOObras daoObras = new DAOObras();
+                String id = splitBasicInfo[0];
+                Obra obra = daoObras.getObra(splitBasicInfo[1]);
+                String fecha = splitBasicInfo[2];
+                String hora = splitBasicInfo[3];
+                Funcion funcion = new Funcion(id, obra, fecha, hora, performanceSeats);
+                this.funciones.add(funcion);
             }
-
-            DAOObras daoObras = new DAOObras();
-            String id = splitBasicInfo[0];
-            Obra obra = daoObras.getObra(splitBasicInfo[1]);
-            String fecha = splitBasicInfo[2];
-            String hora = splitBasicInfo[3];
-            Funcion funcion = new Funcion(id, obra, fecha, hora, performanceSeats);
-            this.funciones.add(funcion);
+        } catch (ObraNoEncontradaException e) {
+            e.getMessage();
         }
     }
 
     public void addFuncion(Funcion funcion) {
+        System.out.println(funcion.getId());
         this.funciones.add(funcion);
         updateDBFile();
     }
@@ -79,10 +85,14 @@ public class DAOFunciones {
 
     public void modificarFuncion(Funcion funcion) {
         try {
-            Funcion db_funcion = buscarFuncion(funcion.getId());
-            int index = getPerformanceIndex(db_funcion);
+            String idFuncion = funcion.getId();
+            System.out.println("funcion entrada: " + funcion.getId());
+            Funcion funcion_a_modificar = buscarFuncion(idFuncion);
+            System.out.println("funcion salida: " + funcion_a_modificar.getId());
+            int index = getPerformanceIndex(funcion_a_modificar);
             this.funciones.set(index, funcion);
-        } catch (NotFoundPerformanceException e) {
+        } catch (NotFoundPerformanceException ex) {
+            ex.printStackTrace();
         }
         updateDBFile();
     }
@@ -96,18 +106,23 @@ public class DAOFunciones {
     }
 
     public Funcion buscarFuncion(String id) throws NotFoundPerformanceException {
-        try {
-            for (Funcion funcion : this.funciones) {
-                if (funcion.getId().equals(id));
+        for (Funcion funcion : this.funciones) {
+            if (funcion.getId().equals(id)) {
+                System.out.println("id " + id);
+                System.out.println("funcion id " + funcion.getId());
                 return funcion;
             }
-        } catch (Exception e) {
         }
         throw new NotFoundPerformanceException("No se encontro la funcion");
     }
 
     public int getPerformanceIndex(Funcion funciion) {
         return this.funciones.indexOf(funciion);
+    }
+
+    public int getPerformanceIndex(String id) throws NotFoundPerformanceException {
+        Funcion funcion = buscarFuncion(id);
+        return this.funciones.indexOf(funcion);
     }
 
     public void updateDBFile() {
@@ -120,7 +135,7 @@ public class DAOFunciones {
                     seatsInformation = seatsInformation + (i + "-" + seats.get(i).getStatus() + ",");
                 }
                 writer.write(funcion.getId() + "," + funcion.getObra().getNombre() + "," + funcion.getFecha_presentacion() + "," + funcion.getHora_presentacion()
-                        +";"+ seatsInformation + "\n");
+                        + ";" + seatsInformation + "\n");
             }
             writer.close();
         } catch (IOException e) {

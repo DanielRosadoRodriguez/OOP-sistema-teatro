@@ -18,7 +18,7 @@ public class Funcion {
         this.fecha_presentacion = fecha_presentacion;
         this.hora_presentacion = hora_presentacion;
         initSeats();
-        this.id = generarId();
+        this.id = id;
     }
 
     public Funcion() {
@@ -31,7 +31,7 @@ public class Funcion {
         this.fecha_presentacion = fecha_presentacion;
         this.hora_presentacion = hora_presentacion;
         this.seats = seats;
-        this.id = generarId();
+        this.id = id;
     }
 
     public String generarId() {
@@ -42,7 +42,6 @@ public class Funcion {
     public void initSeats() {
         for (int i = 0; i <= 24; i++) {
             Seat seat = new Seat();
-            System.out.println(i + " " + seat);
             this.seats.add(seat);
         }
     }

@@ -1,6 +1,7 @@
 
 package DAO;
 
+import errores.ObraNoEncontradaException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -103,12 +104,12 @@ public class DAOObras {
         System.out.println("Registro inxistente");
         return 1; //Registro no encontrado
     }   
-    public Obra getObra(String nombreObra){
+    public Obra getObra(String nombreObra) throws ObraNoEncontradaException{
         for(Obra obra: lista){
             if(obra.getNombre().equals(nombreObra)){
-                return obra;  // Retorna Registro Encontrado
+                return obra;
             }
         }
-        return null; //Registro no encontrado
+        throw new ObraNoEncontradaException();
     }    
 }

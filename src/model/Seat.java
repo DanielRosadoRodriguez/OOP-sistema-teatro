@@ -4,15 +4,15 @@ import java.awt.Color;
 
 public class Seat {
 
-    private final double priceMultiplierSectionA = 0.5;
-    private final double priceMultiplierSectionB = 1;
-    private final double priceMultiplierSectionV = 2;
+    private final double priceMultiplierSectionA = 1;
+    private final double priceMultiplierSectionB = 10;
+    private final double priceMultiplierSectionC = 100;
 
     private String status;
     private Color statusColor;
     private String id;
     private double price;
-    private CoordenateSeat coordenate;
+    private SeatCoordinate coordinate;
 
     public Seat(String id) {
         this.status = "available";
@@ -44,7 +44,46 @@ public class Seat {
     }
 
     public void generatePrice() {
-        this.price = 5;
+        try {
+            switch (this.coordinate.getZone()) {
+                case 1:
+                    this.price = 1;
+                    break;
+                case 2:
+                    this.price = 10;
+                    break;
+                case 3:
+                    this.price = 100;
+                    break;
+                default:
+                    this.price = 1;
+                    break;
+            }
+        } catch (NullPointerException ex) {
+
+        }
+
+    }
+
+    public String getFormattedCoordinatesAsString() {
+        String coordinatesAsString = Integer.toString(this.coordinate.getRow()) + Integer.toString(this.coordinate.getColumn()) + changeSeatZoneFromIntToLetter(this.coordinate.getZone());
+        return coordinatesAsString;
+    }
+
+    public String changeSeatZoneFromIntToLetter(int zoneAsInt) {
+        String zoneAsString = "";
+        switch (zoneAsInt) {
+            case 1:
+                zoneAsString = "A";
+                break;
+            case 2:
+                zoneAsString = "B";
+                break;
+            case 3:
+                zoneAsString = "C";
+                break;
+        }
+        return zoneAsString;
     }
 
     public void setStatusColor(Color statusColor) {
@@ -70,6 +109,15 @@ public class Seat {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public SeatCoordinate getCoordenate() {
+        generatePrice();
+        return coordinate;
+    }
+
+    public void setCoordenate(SeatCoordinate coordenate) {
+        this.coordinate = coordenate;
     }
 
 }

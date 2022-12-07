@@ -32,8 +32,9 @@ public class Ticket {
 
     public ArrayList<Double> obtenerPrecioAsientos() {
         ArrayList<Double> precioAsientos = new ArrayList<>();
-        for (Seat seat : this.seats) {
+        for (Seat seat : this.getSeats()) {
             precioAsientos.add(seat.getPrice());
+            System.out.println("precio arreglo asientos " + seat.getPrice());
         }
         return precioAsientos;
     }
@@ -43,8 +44,8 @@ public class Ticket {
         Double precioBase = this.precioFuncion;
         for (Double precio: precios) {
             totalDeLaVenta += precio * precioBase;
+            System.out.println("precio: " + precio + " precio base: " + precioBase);
         }
-        System.out.println("Estoy calculando total");
         return totalDeLaVenta;
     }
 
@@ -90,6 +91,14 @@ public class Ticket {
 
     public void setNombreFuncion(String nombreFuncion) {
         this.nombreFuncion = nombreFuncion;
+    }
+
+    public ArrayList<Seat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(ArrayList<Seat> seats) {
+        this.seats = seats;
     }
 
 }

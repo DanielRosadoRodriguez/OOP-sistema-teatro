@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import model.Ticket;
 import view.VistaResumen;
 import java.awt.event.ActionListener;
+import model.Seat;
 
 public class ControlResumen implements ActionListener {
 
@@ -29,5 +30,14 @@ public class ControlResumen implements ActionListener {
         this.vistaResumen.getFuncionTxtField().setText(this.modeloTicket.getNombreFuncion());
         this.vistaResumen.getHorarioTxtField().setText(this.modeloTicket.getFuncion().getHora_presentacion());
         this.vistaResumen.getTotalTxtField().setText(this.modeloTicket.getTotal().toString());
+        this.vistaResumen.getAsientosTxtField().setText(getFormattedSeats());
+    }
+    
+    public String getFormattedSeats(){
+        String formattedSeats = "";
+        for(Seat seat: this.modeloTicket.getSeats()){
+            formattedSeats += "-" + seat.getFormattedCoordinatesAsString() + "-";
+        }
+        return formattedSeats;
     }
 }

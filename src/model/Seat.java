@@ -11,14 +11,13 @@ public class Seat {
     private String status;
     private Color statusColor;
     private String id;
-    private char section;
     private double price;
+    private CoordenateSeat coordenate;
 
     public Seat(String id) {
         this.status = "available";
         this.id = id;
         setStatusColor();
-        generateSection();
         generatePrice();
     }
 
@@ -26,7 +25,6 @@ public class Seat {
         this.status = status;
         this.id = id;
         setStatusColor();
-        generateSection();
         generatePrice();
     }
 
@@ -45,15 +43,8 @@ public class Seat {
         }
     }
 
-    public void generateSection() {
-        this.section = this.id.charAt(0);
-    }
-
     public void generatePrice() {
-        //TODO
-        if (this.section == 'a') {
-            System.out.println("this is section a");
-        }
+        this.price = 5;
     }
 
     public void setStatusColor(Color statusColor) {
@@ -72,4 +63,13 @@ public class Seat {
     public Color getStatusColor() {
         return statusColor;
     }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
 }

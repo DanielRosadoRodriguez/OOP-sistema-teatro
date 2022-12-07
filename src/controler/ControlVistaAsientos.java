@@ -14,7 +14,9 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import model.Funcion;
 import model.Seat;
+import model.Ticket;
 import view.VistaAsientos;
+import view.VistaResumen;
 
 public class ControlVistaAsientos implements ActionListener {
 
@@ -60,11 +62,26 @@ public class ControlVistaAsientos implements ActionListener {
             }
         }
         if (this.view.getButtonConfirmar() == e.getSource()) {
+            Ticket ticket = new Ticket(saveSelectedSeats(), this.funcionActual);
+            VistaResumen vista = new VistaResumen();
+            ControlResumen control = new ControlResumen(ticket, vista);
+            vista.setVisible(true);
+            this.view.setVisible(false);
             changeSeatStatusToOccupied();
             this.funcionActual.setSeats(this.seats);
             DAOFunciones daoFunciones = new DAOFunciones();
             daoFunciones.modificarFuncion(this.funcionActual);
         }
+    }
+
+    public ArrayList<Seat> saveSelectedSeats() {
+        ArrayList<Seat> selectedSeats = new ArrayList<>();
+        for (Seat seat : this.seats) {
+            if (seat.getStatus().equals("selected")){
+            selectedSeats.add(seat);
+            }
+        }
+        return selectedSeats;
     }
 
     public void changeSeatStatus(Seat seat) {

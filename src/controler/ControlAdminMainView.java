@@ -85,7 +85,7 @@ public class ControlAdminMainView implements ActionListener {
             Seat seat = new Seat();
             seats.add(seat);
         }
-        ControlVistaAsientos control = new ControlVistaAsientos(seatView, seats);
+        ControlVistaAsientos control = new ControlVistaAsientos(seatView, seats, true);
         setupNewView(seatView);
     }
 

@@ -5,3 +5,4 @@ Blancanieves,Florence Pugh,MrBeast,helicoptero apache,Zapatillas de vidrio,6.0,5
 miki,miki,mimi,Item 2,resumen,3.0,5
 El sirenito,Keanu Reeves,Chuponcito,Romance,resumen ewefefw,3.0,6
 It,el payaso,losdemas,Animada,resumen peli,3.0,6
+Cars 2,Rayo McQueen,Mate,Comedia,Mucha accion y carros,56.0,107

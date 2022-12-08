@@ -53,7 +53,7 @@ public class ControlFunciones implements ActionListener {
         this.modeloFuncion = new Funcion();
         if (vistaCRUDFuncion.getAniadirFuncion() == evento.getSource()) {
             try {
-                Obra obra = buscarObras(vistaCRUDFuncion.getTxtNombreObra().getText());
+                Obra obra = buscarObras(vistaCRUDFuncion.getComboBoxNombreObra().getSelectedItem().toString());
                 this.modeloFuncion.setObra(obra);
 
                 Date fecha = vistaCRUDFuncion.getDataChooserFecha().getDate();
@@ -80,8 +80,8 @@ public class ControlFunciones implements ActionListener {
                 DAOFunciones daoFunciones = new DAOFunciones();
                 Funcion funcion = daoFunciones.buscarFuncion(idFuncion);
                 if (funcion != null) {
-                    vistaCRUDFuncion.getTxtNombreObra().setText(funcion.getObra().getNombre());
-                    vistaCRUDFuncion.getFechaTxtprovisional().setText(funcion.getFecha_presentacion());
+                    vistaCRUDFuncion.getComboBoxNombreObra().setSelectedItem(funcion.getObra().getNombre());
+                    vistaCRUDFuncion.getGetFechaTxtprovisional().setText(funcion.getFecha_presentacion());
                     vistaCRUDFuncion.getHoraComboBox().setSelectedItem(funcion.getHora_presentacion());
 
                 }
@@ -105,7 +105,7 @@ public class ControlFunciones implements ActionListener {
                 modeloFuncion.setFecha_presentacion(formattedFecha.toString());
                 modeloFuncion.setHora_presentacion(vistaCRUDFuncion.getHoraComboBox().getSelectedItem().toString());
                 DAOObras daoObras = new DAOObras();
-                Obra obra = daoObras.getObra(vistaCRUDFuncion.getTxtNombreObra().getText());
+                Obra obra = daoObras.getObra(vistaCRUDFuncion.getComboBoxNombreObra().getSelectedItem().toString());
                 modeloFuncion.setObra(obra);
                 DAOFunciones daoFunciones = new DAOFunciones();
                 try {
@@ -158,20 +158,39 @@ public class ControlFunciones implements ActionListener {
 
     public void configureComboBox() {
         DefaultComboBoxModel<String> model = generateComboBoxModel();
+        DefaultComboBoxModel<String> modelObra = generateComboBoxModelObra();
         this.vistaCRUDFuncion.getBuscarComboBox().setModel(model);
+        this.vistaCRUDFuncion.getComboBoxNombreObra().setModel(modelObra);
         
     }
     
  
-     public DefaultComboBoxModel<String> generateComboBoxModel() {
+    public DefaultComboBoxModel<String> generateComboBoxModel() {
         ArrayList<String> raw_performances = gerFormattedPerformancesInformation();
         String[] performances = raw_performances.toArray(new String[0]);
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(performances);
         return model;
     }
      
-     public ArrayList<String> gerFormattedPerformancesInformation() {
+    public DefaultComboBoxModel<String> generateComboBoxModelObra() {
+        ArrayList<String> raw_obras = gerFormattedObrasInformation();
+        String[] obras = raw_obras.toArray(new String[0]);
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>(obras);
+        return model;
+    }
+    
+    public ArrayList<String> gerFormattedPerformancesInformation() {
         DAOFunciones dao = new DAOFunciones();
         return dao.gerFormattedPerformancesInformation();
     }
+    
+    public ArrayList<String> gerFormattedObrasInformation() {
+        DAOObras dao = new DAOObras();
+        return dao.gerFormattedObrasInformation();
+    }
+     
+     
+     
+     
+   
 }

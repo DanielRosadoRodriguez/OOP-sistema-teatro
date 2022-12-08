@@ -17,6 +17,8 @@ import model.Funcion;
 import model.Seat;
 import model.SeatCoordinate;
 import model.Ticket;
+import view.AdminMainWindow;
+import view.EmpleadoMainWindow;
 import view.VistaAsientos;
 import view.VistaResumen;
 
@@ -28,13 +30,28 @@ public class ControlVistaAsientos implements ActionListener {
     private ArrayList<JButton> buttons = new ArrayList<>();
     private Funcion funcionActual;
     private int indexFuncion;
+    private boolean esAdmin;
 
+    public ControlVistaAsientos(VistaAsientos view, ArrayList<Seat> seats, boolean esAdmin) {
+        this.view = view;
+        this.seats = seats;
+        this.view.getjButton1().addActionListener(this);
+        this.view.getjComboBox1().addActionListener(this);
+        this.view.getButtonConfirmar().addActionListener(this);
+        this.esAdmin = esAdmin;
+        initButtons();
+        setSeatColor();
+        configureComboBox();
+        addActionListenersToButtons();
+    }
+    
     public ControlVistaAsientos(VistaAsientos view, ArrayList<Seat> seats) {
         this.view = view;
         this.seats = seats;
         this.view.getjButton1().addActionListener(this);
         this.view.getjComboBox1().addActionListener(this);
         this.view.getButtonConfirmar().addActionListener(this);
+        this.esAdmin = esAdmin;
         initButtons();
         setSeatColor();
         configureComboBox();
@@ -74,7 +91,7 @@ public class ControlVistaAsientos implements ActionListener {
             try {
                 Ticket ticket = new Ticket(saveSelectedSeats(), this.funcionActual);
                 VistaResumen vista = new VistaResumen();
-                ControlResumen control = new ControlResumen(ticket, vista);
+                ControlResumen control = new ControlResumen(ticket, vista, this.esAdmin);
                 vista.setVisible(true);
                 this.view.setVisible(false);
                 changeSeatStatusToOccupied();
@@ -86,6 +103,22 @@ public class ControlVistaAsientos implements ActionListener {
                 ex.getStackTrace();
             }
 
+        }
+        if(this.view.getRegresarBtn() == e.getSource()){
+            if(this.esAdmin == true){
+                 AdminMainWindow ventana_main_admin = new AdminMainWindow();
+                ControlAdminMainView control_admin = new ControlAdminMainView(ventana_main_admin);
+                ventana_main_admin.setVisible(true);
+                ventana_main_admin.setLocationRelativeTo(null);
+                this.view.setVisible(false);
+            }
+            else{
+                EmpleadoMainWindow ventana_main_empleado = new EmpleadoMainWindow();
+                ventana_main_empleado.setVisible(true);
+                ventana_main_empleado.setLocationRelativeTo(null);
+                this.view.setVisible(false);
+                ControlEmpleadoMainWindow control = new ControlEmpleadoMainWindow(ventana_main_empleado);
+            }
         }
     }
 

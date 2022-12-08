@@ -11,6 +11,14 @@ package view;
  */
 public class VistaAsientos extends javax.swing.JFrame {
 
+    public javax.swing.JButton getRegresarBtn() {
+        return regresarBtn;
+    }
+
+    public void setRegresarBtn(javax.swing.JButton regresarBtn) {
+        this.regresarBtn = regresarBtn;
+    }
+
     public javax.swing.JButton getButtonConfirmar() {
         return buttonConfirmar;
     }
@@ -28,11 +36,11 @@ public class VistaAsientos extends javax.swing.JFrame {
     }
 
     public javax.swing.JButton getjButton1() {
-        return jButton1;
+        return getRegresarBtn();
     }
 
     public void setjButton1(javax.swing.JButton jButton1) {
-        this.jButton1 = jButton1;
+        this.setRegresarBtn(jButton1);
     }
 
     public javax.swing.JButton getjButton10() {
@@ -322,7 +330,7 @@ public class VistaAsientos extends javax.swing.JFrame {
         jButton28 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        regresarBtn = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -465,14 +473,14 @@ public class VistaAsientos extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(205, 214, 244));
         jLabel5.setText("Sección B");
 
-        jButton1.setBackground(new java.awt.Color(245, 224, 220));
-        jButton1.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(17, 17, 27));
-        jButton1.setText("Regresar");
-        jButton1.setBorder(null);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        regresarBtn.setBackground(new java.awt.Color(245, 224, 220));
+        regresarBtn.setFont(new java.awt.Font("Microsoft YaHei UI", 0, 12)); // NOI18N
+        regresarBtn.setForeground(new java.awt.Color(17, 17, 27));
+        regresarBtn.setText("Regresar");
+        regresarBtn.setBorder(null);
+        regresarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                regresarBtnActionPerformed(evt);
             }
         });
 
@@ -583,7 +591,7 @@ public class VistaAsientos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(regresarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel6)
                         .addGap(0, 0, Short.MAX_VALUE))
@@ -617,7 +625,7 @@ public class VistaAsientos extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(regresarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap(37, Short.MAX_VALUE)
@@ -728,9 +736,9 @@ public class VistaAsientos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_buttonConfirmarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void regresarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_regresarBtnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_regresarBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -770,7 +778,6 @@ public class VistaAsientos extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonConfirmar;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -809,5 +816,6 @@ public class VistaAsientos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> performancesComboBox;
+    public javax.swing.JButton regresarBtn;
     // End of variables declaration//GEN-END:variables
 }

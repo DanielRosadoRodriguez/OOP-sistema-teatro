@@ -70,7 +70,7 @@ public class ControlEmpleadoMainWindow implements ActionListener {
             Seat seat = new Seat();
             seats.add(seat);
         }
-        ControlVistaAsientos control = new ControlVistaAsientos(seatView, seats);
+        ControlVistaAsientos control = new ControlVistaAsientos(seatView, seats, false);
         setupNewView(seatView);
     }
     

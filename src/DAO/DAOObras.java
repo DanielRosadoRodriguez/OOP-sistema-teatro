@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import model.Funcion;
 import model.Obra;
 
 public class DAOObras {
@@ -103,7 +104,18 @@ public class DAOObras {
         } 
         System.out.println("Registro inxistente");
         return 1; //Registro no encontrado
-    }   
+    }  
+       
+       
+    public ArrayList<String> gerFormattedObrasInformation() {
+        ArrayList<String> formattedObrasInformation = new ArrayList<>();
+        for (Obra obras : this.lista) {
+            String formattedObra = obras.getNombre();
+            formattedObrasInformation.add(formattedObra);
+        }
+        return formattedObrasInformation;
+    }
+    
     public Obra getObra(String nombreObra) throws ObraNoEncontradaException{
         for(Obra obra: lista){
             if(obra.getNombre().equals(nombreObra)){
